@@ -39,6 +39,14 @@ function App() {
     }
   };
 
+  const soldOut = e => {
+    if (e.target.closest('li').classList.contains('sold-out')) {
+      e.target.closest('li').classList.remove('sold-out');
+    } else {
+      e.target.closest('li').classList.add('sold-out');
+    }
+  };
+
   $addButton.addEventListener('click', addMenu);
   $menuList.addEventListener('click', e => {
     if (e.target.classList.contains('menu-edit-button')) {
@@ -47,26 +55,35 @@ function App() {
     if (e.target.classList.contains('menu-remove-button')) {
       removeMenu(e);
     }
+    if (e.target.classList.contains('menu-sold-out-button')) {
+      soldOut(e);
+    }
   });
   updateMenuCount();
 
   const template = name => {
     return `
-        <li class="menu-list-item d-flex items-center py-2">
-        <span class="w-100 pl-2 menu-name">${name}</span>
-        <button
-        type="button"
-        class="bg-gray-50 text-gray-500 text-sm mr-1 menu-edit-button"
-        >
-        수정
-        </button>
-        <button
-        type="button"
-        class="bg-gray-50 text-gray-500 text-sm menu-remove-button"
-        >
-        삭제
-        </button>
-    </li>
+    <li class="menu-list-item d-flex items-center py-2">
+    <span class="w-100 pl-2 menu-name">${name}</span>
+    <button
+      type="button"
+      class="bg-gray-50 text-gray-500 text-sm mr-1 menu-sold-out-button"
+    >
+      품절
+    </button>
+    <button
+      type="button"
+      class="bg-gray-50 text-gray-500 text-sm mr-1 menu-edit-button"
+    >
+      수정
+    </button>
+    <button
+      type="button"
+      class="bg-gray-50 text-gray-500 text-sm menu-remove-button"
+    >
+      삭제
+    </button>
+  </li>
   
       `;
   };

@@ -1,4 +1,4 @@
-const $ = selector => document.querySelector(selector);
+import { $ } from './util.js';
 
 function App() {
   const $input = $('#espresso-menu-name');
@@ -40,10 +40,11 @@ function App() {
   };
 
   const soldOut = e => {
-    if (e.target.closest('li').classList.contains('sold-out')) {
-      e.target.closest('li').classList.remove('sold-out');
+    const $span = e.target.closest('li').children[0];
+    if ($span.classList.contains('sold-out')) {
+      $span.classList.remove('sold-out');
     } else {
-      e.target.closest('li').classList.add('sold-out');
+      $span.classList.add('sold-out');
     }
   };
 
